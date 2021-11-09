@@ -1,0 +1,13 @@
+What is reactive programming
+    - new programming paradigm
+    - code is async and non blocking
+    - data flows as an event/message driven stream
+    - funtional style code
+
+BackPressure
+    - overwhelm the app with lots of data
+    - app controlling the data coming from db
+    - data sent based on request from app
+
+When to use reactive programming 
+    - to support high load and requests at a time
