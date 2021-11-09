@@ -1,0 +1,35 @@
+Why Reactive ?
+    - Current gen is microservices and deployed in cloud and they are distributed,
+    Expectations 
+    - No response time, no downtime, scale automatically.
+
+Thread Per Request model
+    - Spring MVC is a Concurreny Thread Per Request model, its a blocking API because the thread is blocked until 
+      the response is generated, the request needed other API calls
+    Limitions of Spring MVC
+    - Thread pool size of embedded tomcat is limited to 200
+    - We can increase but its limited
+    - Cannot support more users because one thread takes upto 1MB in heap space
+
+Callbacks
+    - Async methods, accepts callback as a parameter and invokes it when the blocking call completes
+    - complex, hard to read
+
+Future API
+    - To write async code
+    Disadvantages
+    - No easy way to combine multiple futures
+    - Future.get() - a blocking call
+
+CompletableFuture
+    - To wrtie async code in a funtional style
+    - Easy to compose/combine multipleFutures
+    Disadvantages
+    - Wont handle well many elements like collections
+    - cannot able to handle infinite values
+
+Drawbacks of SpringMVC
+    - Concurrent is limited in spring mvc
+    - Blocking code leads to inefficient usage of threads
+    - Servlet API at the server level is a blocking one
+ 
