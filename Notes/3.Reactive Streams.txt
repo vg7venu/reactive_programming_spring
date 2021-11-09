@@ -1,0 +1,36 @@
+Reactive Stream are foundations of reactive programming
+it has specification: It has interfaces
+- publisher
+- subsriber
+- subscription
+- processor
+
+Publisher: 
+    represents data source 
+    it has one method 
+    public interface publisher {
+        public void subscribe(Subscribe<super T> s);
+    }
+
+Subscriber: 
+    public inteface subsriber<>{
+        public void onSubscribe(Subscribe s);
+        public void onNext(); - how the data goes from db to app
+        public void onError(); - when run time errors publisher uses this
+        public void onComplete(); - when the data completes it closes
+    }
+
+Subscription: its the one of which connects app and datasource i.e publisher and subscriber
+    public interface Subscription {
+        public void request(long n); - to request data
+        public void cancel(); - to cancel the request 
+    }
+
+Exceptions are also treated as data
+The reactive stream is dead when an exception is thrown
+
+Processor: it can behave as subscriber and publisher
+    public interface Processor<T,R? extends Subscriber<T>, Publisher<R> {
+
+    }
+
