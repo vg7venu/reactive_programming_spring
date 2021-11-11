@@ -12,10 +12,16 @@ public class FluxAndMonoGeneratorService {
         return Flux.fromIterable(List.of("venue","seven","even"))
                 .log();
     }
-    public Flux<String> namesFlux_map(int lenOfString) {
-        return Flux.fromIterable(List.of("captains","displease","marshmallows")).map(String::toUpperCase)
-                .filter(s-> s.length()>= lenOfString).map(name -> name+" masti")
-                .map(name -> name.toLowerCase());
+    public Flux<String> namesFlux_flatmap(int lenOfString) {
+        return Flux.fromIterable(List.of("lol","please","rolf")).map(String::toUpperCase)
+                .filter(s-> s.length()<= lenOfString).map(name -> name+"l")
+                .map(name -> name.toLowerCase())
+                .flatMap(name -> stringSplitter(name));
+    }
+
+    public Flux<String> stringSplitter(String name){
+        var arrayOfStrings = name.split("");
+        return Flux.fromArray(arrayOfStrings);
     }
 
     public Flux<String> namesFlux_immutable() {
@@ -37,6 +43,6 @@ public class FluxAndMonoGeneratorService {
             System.out.println("This is mono "+name);
         });
 
-        fluxAndMonoGeneratorService.namesFlux_map(9).subscribe(name-> System.out.println(name));
+        fluxAndMonoGeneratorService.namesFlux_flatmap(5).subscribe(name-> System.out.println(name));
     }
 }

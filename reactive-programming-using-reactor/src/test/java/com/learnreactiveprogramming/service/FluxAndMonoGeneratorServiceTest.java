@@ -28,10 +28,10 @@ class FluxAndMonoGeneratorServiceTest {
     }
 
     @Test
-    void namesFlux_map() {
-        int lenOfString = 9;
-        var namesFlux_map = fluxAndMonoGeneratorService.namesFlux_map(lenOfString);
-        StepVerifier.create(namesFlux_map).expectNext("displease masti","marshmallows masti")
+    void namesFlux_flatmap() {
+        int lenOfString = 5;
+        var namesFlux_map = fluxAndMonoGeneratorService.namesFlux_flatmap(lenOfString);
+        StepVerifier.create(namesFlux_map).expectNext("l","o","l","l","r","o","l","f","l")
                 .verifyComplete();
     }
 

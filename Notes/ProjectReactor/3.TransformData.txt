@@ -6,3 +6,10 @@ map():
 
 filter():
     used to filter the stream
+
+flatMap():
+    Transforms one source elements to a flux of 1 to N elements
+    ex: "AKIL" to Flux.just("A","K","I","L")
+    use when the transformation returns a reactive type flux or mono
+    flatmap always returns Flux<Type>
+
