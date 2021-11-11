@@ -3,8 +3,10 @@ package com.learnreactiveprogramming.service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.StringJoiner;
 
 public class FluxAndMonoGeneratorService {
@@ -17,6 +19,19 @@ public class FluxAndMonoGeneratorService {
                 .filter(s-> s.length()<= lenOfString).map(name -> name+"l")
                 .map(name -> name.toLowerCase())
                 .flatMap(name -> stringSplitter(name));
+    }
+
+    public Flux<String> flapMapAsync(int lenOfString){
+        return Flux.fromIterable(List.of("lol","please","rolf")).map(String::toUpperCase)
+                .filter(s-> s.length()<= lenOfString).map(name -> name+"l")
+                .map(name -> name.toLowerCase())
+                .flatMap(name -> stringSplitterWithDelay(name).log());
+    }
+
+    public Flux<String> stringSplitterWithDelay(String name){
+        var arrayOfStrings = name.split("");
+        var delay = new Random().nextInt(2000);
+        return Flux.fromArray(arrayOfStrings).delayElements(Duration.ofMillis(delay));
     }
 
     public Flux<String> stringSplitter(String name){

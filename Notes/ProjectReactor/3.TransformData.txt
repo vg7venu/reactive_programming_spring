@@ -12,4 +12,16 @@ flatMap():
     ex: "AKIL" to Flux.just("A","K","I","L")
     use when the transformation returns a reactive type flux or mono
     flatmap always returns Flux<Type>
+    dont use flapmap when you need are constraint to order
+
+Comparison
+map() - 1 to 1 Transformation
+flapmap() - 1 to N Transformations
+map() - Does the simple transformations from T to V
+flatmap() - Does more than just transformations. subscribes to flux or mono thats part of the transformation
+            and then flattens it and sends it downstream
+map() - synchronous transformations
+flatmap() - asynchronous transformations
+map() - doesnt support transformations that returns the publisher
+flatmap() - it returns the publisher/ reactive types
 

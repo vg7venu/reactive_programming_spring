@@ -42,4 +42,13 @@ class FluxAndMonoGeneratorServiceTest {
                 .expectNext("LOL","ROLF")
                 .verifyComplete();
     }
+
+    @Test
+    void flapMapAsync() {
+        var namesFlux = fluxAndMonoGeneratorService.flapMapAsync(5);
+        StepVerifier.create(namesFlux)
+//                .expectNext("l","o","l","l","r","o","l","f","l")
+                .expectNextCount(9)
+                .verifyComplete();
+    }
 }
