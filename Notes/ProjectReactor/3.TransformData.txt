@@ -1,0 +1,8 @@
+When you want to apply some transformations like uppercase,lowercase,.. to the data you get from
+publisher, you use this transform data you can apply these transformations
+
+map():
+    used to transform the element from one form to another in a Reactive stream
+
+filter():
+    used to filter the stream
