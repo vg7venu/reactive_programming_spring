@@ -1,8 +1,10 @@
 package learn.reactive.react.controller;
 
+import javax.print.attribute.standard.Media;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +31,15 @@ public class BaseController {
     @GetMapping("/switchIf/{number}")
     public Flux<String> switchIf(@RequestParam Integer num) {
         return alfredService.switchIfEmpty(num);
+    }
+
+    @GetMapping(value = "/concat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> concat() {
+        return alfredService.concat();
+    }
+
+    @GetMapping("/concatWith")
+    public Flux<String> concatWith() {
+        return alfredService.concatWith();
     }
 }

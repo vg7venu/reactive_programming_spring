@@ -1,5 +1,6 @@
 package learn.reactive.react.service;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 
@@ -29,5 +30,15 @@ public class AlfredService {
                 .transform(fun)
                 .filter(s -> s.length() > num)
                 .switchIfEmpty(defFlux);
+    }
+
+    public Flux<String> concat() {
+        return Flux.concat(Flux.just("String 1"), Flux.just("String 2"))
+                .delayElements(Duration.ofMillis(1000));
+    }
+
+    public Flux<String> concatWith() {
+        Flux<String> con = Flux.just("item4", "item5", "item6");
+        return Mono.just("item1").concatWith(con);
     }
 }
