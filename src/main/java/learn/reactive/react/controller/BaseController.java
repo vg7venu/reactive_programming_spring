@@ -1,0 +1,33 @@
+package learn.reactive.react.controller;
+
+import javax.websocket.server.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import learn.reactive.react.service.AlfredService;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+public class BaseController {
+    @Autowired
+    private AlfredService alfredService;
+
+    @GetMapping("/hello")
+    public Mono<String> helloWorld() {
+        return alfredService.helloWorld();
+    }
+
+    @GetMapping("/defaultIf")
+    public Flux<String> defaultIf() {
+        return alfredService.defaultIfEmpty();
+    }
+
+    @GetMapping("/switchIf/{number}")
+    public Flux<String> switchIf(@RequestParam Integer num) {
+        return alfredService.switchIfEmpty(num);
+    }
+}
