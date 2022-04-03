@@ -1,8 +1,5 @@
 package learn.reactive.react.controller;
 
-import javax.print.attribute.standard.Media;
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,5 +38,15 @@ public class BaseController {
     @GetMapping("/concatWith")
     public Flux<String> concatWith() {
         return alfredService.concatWith();
+    }
+
+    @GetMapping("/merge")
+    public Flux<String> merge() {
+        return alfredService.merge();
+    }
+
+    @GetMapping("/mergeWith")
+    public Flux<String> mergeWith() {
+        return alfredService.mergeWith();
     }
 }

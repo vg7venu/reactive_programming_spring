@@ -41,4 +41,16 @@ public class AlfredService {
         Flux<String> con = Flux.just("item4", "item5", "item6");
         return Mono.just("item1").concatWith(con);
     }
+
+    public Flux<String> merge() {
+        Flux<String> item = Flux.just("data 1", "data 2").delayElements(Duration.ofMillis(1000));
+        Flux<String> item2 = Flux.just("data 3", "data 4").delayElements(Duration.ofMillis(1500));
+        return Flux.merge(item, item2);
+    }
+
+    public Flux<String> mergeWith() {
+        Flux<String> item = Flux.just("data 1", "data 2").delayElements(Duration.ofMillis(1000));
+        Mono<String> item2 = Mono.just("data 3").delayElement(Duration.ofMillis(1500));
+        return item.mergeWith(item2);
+    }
 }
