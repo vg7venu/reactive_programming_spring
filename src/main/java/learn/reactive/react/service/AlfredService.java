@@ -53,4 +53,30 @@ public class AlfredService {
         Mono<String> item2 = Mono.just("data 3").delayElement(Duration.ofMillis(1500));
         return item.mergeWith(item2);
     }
+
+    public Flux<String> zip() {
+        Flux<String> item1 = Flux.just("data 1", "data 2", "data 6");
+        Flux<String> item2 = Flux.just("data 3", "data 4");
+        return Flux.zip(item1, item2, (one, two) -> one + two);
+        // solution data 1 data 3 data 2 data 4
+        // data 6 will be skipped because of no partner no parner
+    }
+
+    public Flux<String> zipMonoAndFlux() {
+        Mono<String> item1 = Mono.just("data 1");
+        Flux<String> item2 = Flux.just("data 3", "data 4");
+        Flux<String> item3 = Flux.just("data 5", "data 6");
+        return Flux.zip(item1, item2, item3).flatMap(res -> Flux.just(res.getT1() + res.getT2() + res.getT3()));
+        // solution data 1 data 3 data 5
+        // data 4 data 6 will be skipped because of no partner to combine with
+    }
+
+    public Flux<String> zipWith() {
+        Flux<String> item1 = Flux.just("data 1", "data 2", "data 6");
+        Flux<String> item2 = Flux.just("data 3", "data 4");
+        return item1.zipWith(item2, (one, two) -> one + two);
+        // solution data 1 data 3 data 2 data 4
+        // data 6 will be skipped no parner
+    }
+
 }

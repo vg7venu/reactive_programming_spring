@@ -49,4 +49,19 @@ public class BaseController {
     public Flux<String> mergeWith() {
         return alfredService.mergeWith();
     }
+
+    @GetMapping("/zip")
+    public Flux<String> zip() {
+        return alfredService.zip();
+    }
+
+    @GetMapping("/zipWith")
+    public Flux<String> zipWith() {
+        return alfredService.zip();
+    }
+
+    @GetMapping("/zipMonoAndFlux")
+    public Flux<String> zipMonoAndFlux() {
+        return alfredService.zipMonoAndFlux();
+    }
 }
