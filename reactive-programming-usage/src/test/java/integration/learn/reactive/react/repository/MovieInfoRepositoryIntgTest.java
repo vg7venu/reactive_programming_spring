@@ -1,5 +1,7 @@
 package learn.reactive.react.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -44,5 +46,14 @@ public class MovieInfoRepositoryIntgTest {
     void testFindAll() {
         var list = movieInfoRepository.findAll();
         StepVerifier.create(list).expectNextCount(2).verifyComplete();
+    }
+
+    @Test
+    void testFindById() {
+        var movie = movieInfoRepository.findById("2");
+        StepVerifier.create(movie)
+                .assertNext(movieInfo -> {
+                    assertEquals(2022, movieInfo.getYear());
+                });
     }
 }
