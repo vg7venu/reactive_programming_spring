@@ -56,4 +56,14 @@ public class MovieInfoRepositoryIntgTest {
                     assertEquals(2022, movieInfo.getYear());
                 });
     }
+
+    @Test
+    void testSaveMovieInfo() {
+        var movie = movieInfoRepository.save(new MovieInfo("3", "KGF",
+                List.of("Rocky", "Neel"), 2022,
+                LocalDate.parse("2022-04-14")));
+        StepVerifier.create(movie).assertNext(movieInfo -> {
+            assertEquals("Rocky", movieInfo.getCast().get(0));
+        });
+    }
 }
