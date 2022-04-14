@@ -1,6 +1,9 @@
 package learn.reactive.react.controller;
 
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,8 +15,10 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class BaseController {
+
     @Autowired
-    private AlfredService alfredService;
+            @Qualifier("alfredService")
+    AlfredService alfredService;
 
     @GetMapping("/hello")
     public Mono<String> helloWorld() {
@@ -63,5 +68,10 @@ public class BaseController {
     @GetMapping("/zipMonoAndFlux")
     public Flux<String> zipMonoAndFlux() {
         return alfredService.zipMonoAndFlux();
+    }
+
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Long> stream() {
+        return Flux.interval(Duration.ofSeconds(1));
     }
 }
